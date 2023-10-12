@@ -3,6 +3,8 @@ package AlgorithmsCourse.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LinkedListTest {
     LinkedList list;
     @BeforeEach
@@ -72,5 +74,47 @@ public class LinkedListTest {
         list2.appendToTail(5);
 
         Node list3 = LinkedList.mergeTwoLists(list.head,list2.head);
+    }
+    @Test
+    public void nthNodeToLast(){
+        list.appendToTail(1);
+        list.appendToTail(2);
+        list.appendToTail(4);
+        list.appendToTail(6);
+        Node n = LinkedList.nthNodeToLast(list.head,2);
+        assertEquals(4,n.value);
+    }
+    @Test
+    public void addTwoNumbers(){
+        LinkedList list2 = new LinkedList();
+
+        list.appendToTail(1);
+        list.appendToTail(2);
+        list.appendToTail(4);
+        list.appendToTail(6);
+
+        list2.appendToTail(5);
+        list2.appendToTail(2);
+        list2.appendToTail(8);
+
+        Node list3 = LinkedList.addTwoNumbers(list.head,list2.head);
+
+        assertEquals(6,list3.value);
+
+    }
+    @Test
+    public void swapNodesInPairs(){
+
+        list.appendToTail(1);
+        list.appendToTail(2);
+        list.appendToTail(4);
+        list.appendToTail(6);
+        list.appendToTail(8);
+
+        Node list3 = LinkedList.swapNodesInPairsNewList(list.head);
+        //Node list3 = LinkedList.swapNodesInPairs(list.head);
+
+        assertEquals(2,list3.value);
+
     }
 }
