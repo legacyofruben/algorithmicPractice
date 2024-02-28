@@ -1,6 +1,7 @@
 package AlgorithmsCourse.LinkedList;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LinkedList {
@@ -179,5 +180,36 @@ public class LinkedList {
         }
         return startList.next;
     }*/
+    public LinkedList mergeTwoLists(LinkedList list1, LinkedList list2){
+        // base case
+        if(list1==null && list2==null) return null;
+        if(list1!=null && list2==null) return list1;
+        if(list1==null && list2!=null) return list2;
 
+        // two pointers
+        Node p1 = list1.head;
+        Node p2 = list2.head;
+        LinkedList list3 = new LinkedList();
+        while(p1!=null && p2!=null){
+            if(p1.value <= p2.value){
+                list3.appendToTail(p1.value);
+                p1 = p1.next;
+            }else{
+                list3.appendToTail(p2.value);
+                p2 = p2.next;
+            }
+        }
+        Node aux = getRest(p1,p2);
+        while(aux != null){
+            list3.appendToTail(aux.value);
+            aux = aux.next;
+        }
+
+        return list3;
+    }
+
+
+    public Node getRest(Node list1, Node list2) {
+        return list1 == null ? list2 : list1;
+    }
 }
