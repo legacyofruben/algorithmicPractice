@@ -24,62 +24,54 @@ public class MergeIntervals {
      * Explanation: Interval [1,3] and [2,6] overlap, so they should be merged into [1,6].
      */
 
-    public static List<List<Integer>> merge_intervals(List<List<Integer>> intervals){
-        /*List<List<Integer>> r = new ArrayList<>();
-        for (List<Integer> l:intervals) {
-            if (r.isEmpty()) {
-                r.add(List.of(l.get(0),l.get(1)));
-                continue;
-            }
-            if(l.get(0) <= r.get(r.size()-1).get(1)){
-                int pos0 = r.get(r.size()-1).get(0);
-                r.remove(r.size()-1);
-                r.add(List.of(pos0,l.get(1)));
+    public static List<int[]> merge(int[][] intervals){
+        if(intervals == null) return null;
+        if(intervals.length == 0) return List.of();
+        if(intervals.length == 1) return List.of(intervals);
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        List<int[]> list = new ArrayList<>();
+        //[[1,3],[2,6],[8,10],[15,18]]
+        //[[1,6],[8,10],[15,18]]
+        for (int i = 1; i < intervals.length; i++) {
+            int nextStart = intervals[i][0];
+            int nextEnd = intervals[i][1];
+            if(nextStart <= end ){
+                end = Math.max(nextEnd,end);
             }else{
-                r.add(l);
-            }
-        }*/
-        if(intervals.size() == 0) return List.of();
-        if(intervals.size() == 1) return List.of(intervals.get(0));
-
-        for (int i = 1; i < intervals.size(); i++) {
-            if (intervals.get(i).get(0) <= intervals.get(i-1).get(1)) {
-                int pos1 = intervals.get(i).get(1);
-                intervals.get(i-1).set(1,pos1);
-                intervals.remove(i);
-                i--;
+                list.add(new int[]{start,end});
+                start = nextStart;
+                end =nextEnd;
             }
         }
-        return intervals;
+        list.add(new int[]{start,end});
+        return list;
     }
+
+
+
+
 }
 
 class MergeIntervalsTest{
     @Test
-    public void merge_intervalsTest(){
-        List<List<Integer>> intervals = new ArrayList<>(Arrays.asList(
-                new ArrayList<>(Arrays.asList(1,3)),
-                new ArrayList<>(Arrays.asList(2,6)),
-                new ArrayList<>(Arrays.asList(8,10)),
-                new ArrayList<>(Arrays.asList(15,18))
-        ));
-
-        assertEquals(new ArrayList<>(Arrays.asList(
-                new ArrayList<>(Arrays.asList(1,6)),
-                new ArrayList<>(Arrays.asList(8,10)),
-                new ArrayList<>(Arrays.asList(15,18)))
-        ),MergeIntervals.merge_intervals(intervals));
-
-        /**
-         * Input: intervals = [[1,4],[4,5]]
-         * Output: [[1,5]]
-         */
-        intervals = new ArrayList<>(Arrays.asList(
-                new ArrayList<>(Arrays.asList(1,4)),
-                new ArrayList<>(Arrays.asList(4,5))
-        ));
-        assertEquals(List.of(
-                List.of(1,5)
-        ),MergeIntervals.merge_intervals(intervals));
+    public void mergeTest(){
+        int[][] inter = new int[][]{
+                {1,3},
+                {2,6},
+                {8,10},
+                {15,18},
+        };
+        inter = new int[][]{
+                {1,4},
+                {2,3}
+        };
+        inter = new int[][]{
+                {1,4},
+                {5,6}
+        };
+        MergeIntervals.merge(inter).forEach(input->{
+            System.out.print("["+input[0]+","+input[1]+"],");
+        });
     }
 }

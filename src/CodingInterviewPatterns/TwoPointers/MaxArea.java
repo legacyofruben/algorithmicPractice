@@ -1,4 +1,4 @@
-package Patters.TwoPointers;
+package CodingInterviewPatterns.TwoPointers;
 
 import org.junit.jupiter.api.Test;
 
