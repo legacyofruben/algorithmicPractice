@@ -11,35 +11,49 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class PickingNumbers {
 
-    public static boolean validate(Set<Integer> list, int num){
-
-        for(int i : list){
-            System.out.println(i);
+    public static boolean validate(Set<Integer> set, List<Integer> a,  int l, int r){
+        if(!set.contains(a.get(r)) || !set.contains(a.get(l))){
+            int diffAbs = Math.abs(a.get(l) - a.get(r));
+            if(diffAbs == 0 || diffAbs == 1){
+                set.add(a.get(l));
+                set.add(a.get(r));
+                return true;
+            }
+            return false;
         }
-        return false;
+        return true;
     }
     public static int pickingNumbers(List<Integer> a){
         // base case
         int n = a.size();
         if(n == 0) return 0;
         if(n == 1) return 1;
-        Set<Integer> list = new HashSet<>();
+        Collections.sort(a);
+        Set<Integer> set = new HashSet<>();
         int l=0;
         int r=1;
-        list.add(a.get(l));
+        int max = r-l;
         while (r < n){
-            if(validate(list,a.get(r))){
-
+            if(validate(set,a,l,r)){
+                r++;
+            }else{
+                set.clear();
+                max = Math.max(max, (r-l));
+                l = r;
+                r = l+1;
             }
-            System.out.print(a.get(r++));
         }
-        return 0;
+        return Math.max(max, (r-l));
     }
 }
 class PickingNumbersTest{
     @Test
     public void pickingNumbersTest(){
-        List<Integer> input = List.of(1,1,2,2,4,4,5,5,5);
-        assertEquals(5,PickingNumbers.pickingNumbers(input));
+        Integer[] values = new Integer[]{1,1,2,2,4,4,5,5,5};
+        //assertEquals(5,PickingNumbers.pickingNumbers(new ArrayList<>(Arrays.asList(values))));
+        values = new Integer[]{4, 6, 5, 3, 3, 1};
+        //assertEquals(3,PickingNumbers.pickingNumbers(new ArrayList<>(Arrays.asList(values))));
+        values = new Integer[]{1,2,2,3,1,2};
+        assertEquals(5,PickingNumbers.pickingNumbers(new ArrayList<>(Arrays.asList(values))));
     }
 }
