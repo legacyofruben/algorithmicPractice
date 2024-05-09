@@ -2,9 +2,14 @@ package LeetCode.PalindromicSubstring;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Logger;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PalindromicSubstring {
+    private static final Logger logger = Logger.getLogger(PalindromicSubstring.class.getName());
     /***
      * 5. Longest Palindromic Substring
      *
@@ -21,56 +26,41 @@ public class PalindromicSubstring {
      * Input: s = "cbbd"
      * Output: "bb"
      */
+
+    public static boolean isPalindromic(String s){
+        int len = s.length()-1;
+        for (int i = 0; i < s.length()/2; i++, len--) {
+            if(s.charAt(i)!=s.charAt(len)){
+                return false;
+            }
+        }
+        return true;
+    }
     public static String longestPalindromic (String s){
         // aacabdkacaa
-        String longest = String.valueOf(s.charAt(0));
-        outer: for (int i = 0; i < s.length(); i++) {
-            int lindex = s.lastIndexOf(s.charAt(i));
-            if (lindex != -1) {
-                 while(lindex != i && (lindex+1-i) > longest.length()){
-                    String subS = s.substring(i,lindex+1);
-                    //validate
-                    int len = subS.length();
-                    for (int j = 0; j < subS.length()/2; j++,len--) {
-                        if(subS.charAt(j) != subS.charAt(len-1)){
-                            lindex--;
-                            continue outer;
-                        }
-                    }
-                    System.out.println(subS);
-                    longest = subS.length() > longest.length() ? subS : longest;
-                    lindex--;
+        String longest = "";
+        int len = s.length();
+        int l=0;
+        int r=1;
+        while(l <= len){
+            logger.info(s.substring(l,r));
+            if((len-l) >= longest.length()){
+                if ((s.substring(l,r).length() > longest.length()) &&
+                        isPalindromic(s.substring(l,r))) {
+                    longest = s.substring(l,r);
                 }
-
+            }else{
+                break;
+            }
+            if(r <= len-1){
+                r++;
+            }else{
+                l++;
+                r=l+1;
             }
         }
         return longest;
     }
-/*    public static String longestPalindromic (String s){
-        // slide window
-        int l=0;
-        int r=1;
-        String longest = "";
-
-        outer: while(l != r){
-            String window = s.substring(l,r);
-            // Validate
-            int subStrLen = window.length();
-            //boolean flag = true;
-            for (int j = 0; j < window.length()/2; j++, subStrLen--) {
-                if(window.charAt(j) != window.charAt(subStrLen-1)){
-                    l++;
-                    //flag = false;
-                    continue outer;
-                }
-            }
-            longest = window.length() > longest.length() ? window : longest;
-            if((r+1) <= s.length()-1){
-                r++;
-            }
-        }
-        return "";
-    }*/
 
 }
 class PalindromicSubstringTest{
