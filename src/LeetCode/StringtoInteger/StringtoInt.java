@@ -2,6 +2,10 @@ package LeetCode.StringtoInteger;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.plaf.IconUIResource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,97 +15,52 @@ public class StringtoInt {
     /**
      * leetcode: https://leetcode.com/problems/string-to-integer-atoi/description/
      */
-    public static boolean detected(String regex, char c){
-        //Pattern pattern = Pattern.compile("//d+-s");
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(String.valueOf(c));
-        return matcher.find();
-/*        try{
-            return matcher.start();
-        }catch (Exception ex){
-            return -1;
-        }*/
 
+    public static boolean isDigit(int c){
+        int zero = '0';
+        int nine = '9';
+        if(c >= zero && c <= nine){
+            return true;
+        }
+        return false;
     }
-    public static int myAtoi(String s){
-        //1
-        StringBuilder str = new StringBuilder(s);
-        int l = -1;
-        int r = 0;
-        boolean neg = false;
-        boolean pos = false;
-        boolean leadZero = false;
 
-
-        //2 clean str for letters and spaces
-       loop: for (int i = 0; i < s.toCharArray().length; i++) {
-            char c = str.charAt(i);
-            if(detected("[\\d+\\-\\s]+",c)){
-                if(c == ' '){
-                    if(r == 0 && l == 0){
-                        r = i;
-                        break;
-                    }
-                    r = r != 0 && l != -1 ? i : r;
-                    continue;
+    public static int myAtoi(String s) {
+        long num = -1;
+        boolean negative = false;
+        //num = num == -1 ? Integer.parseInt(String.valueOf(c)) : (num*10) + Integer.parseInt(String.valueOf(c));
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ' ') continue;
+            if (c == '+' || c == '-') {
+                if ((i + 1) < s.length() && isDigit(s.charAt(i + 1))) {
+                    negative = c == '-' ? true : false;
+                } else {
+                    break;
                 }
-                switch (c){
-                    case '+':
-                        pos = true;
-                        if(neg){
-                            return 0;
-                        }
-                        if(leadZero || l != -1){
-                            r = i;
-                            break loop;
-                        }
-                        continue;
-                    case '-':
-                        neg = true;
-                        if(pos){
-                            return 0;
-                        }
-                        if(leadZero || l != -1){
-                            r = i;
-                            break loop;
-                        }
-                        continue;
-                    case '0':
-                        if(l != 0 && r == 0){
-                            leadZero = true;
-                            l = i;
-                        }
-                        break;
-                    default:
-                        if(leadZero){
-                            l = l+1;
-                            leadZero = false;
-                        }else{
-                           if(l == -1){
-                               l = i;
-                           }
-                        }
-                        break;
+            } else if (isDigit(c)) {
+                int j = i;
+                while (j < s.length() && isDigit(s.charAt(j))) {
+                    int i1 = Integer.parseInt(String.valueOf(s.charAt(j)));
+                    num = num == -1 ? i1 : (num * 10) + i1;
+                    if(num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) break;
+                    j++;
                 }
-                System.out.print(c);
-            }else{
-                r = i;
                 break;
+            } else {
+                return 0;
             }
         }
-        r = r == 0 ? s.length() : r;
-        if(l == -1)
-            return 0;
 
-        long num = neg ? Long.valueOf(s.substring(l,r)) * -1 : Long.parseLong(s.substring(l,r));
-
-        if(Integer.MIN_VALUE > num){
-            return Integer.MIN_VALUE;
-        }else if(num >= Integer.MAX_VALUE){
-            return Integer.MAX_VALUE;
+        if (negative) {
+            num = num * -1;
+            if(num == -1 ) return -1;
         }
 
-        return Integer.valueOf((int) num);
+        if(num >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        if(num <= Integer.MIN_VALUE) return Integer.MIN_VALUE;
+
+        return num == -1 ? 0 : (int)num;
     }
 }
 
@@ -156,6 +115,19 @@ class StringToIntTest{
     @Test
     public void test10(){
         assertEquals(0,StringtoInt.myAtoi("    0000000000000   "));
+    }
+    @Test
+    public void test11(){
+        assertEquals(-1,StringtoInt.myAtoi("-1"));
+    }
+    @Test
+    public void test12(){
+        assertEquals(2147483647,StringtoInt.myAtoi("9223372036854775808"));
+    }
+
+    @Test
+    public void test13(){
+        assertEquals(-2147483648,StringtoInt.myAtoi("-91283472332"));
     }
 
 
