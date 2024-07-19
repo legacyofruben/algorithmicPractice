@@ -1,3 +1,4 @@
+/*
 package LeetCode.ThreeSum;
 
 import com.Algorithms.Anagram.Solution;
@@ -9,9 +10,11 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ThreeSum {
-    /**
+    */
+/**
      * link: https://leetcode.com/problems/3sum/description/
-     */
+     *//*
+
 
     public static List<List<Integer>> addSol(int[] index, int[] nums, List<List<Integer>> solutions){
         List<Integer> list = List.of(nums[index[0]],nums[index[1]],nums[index[2]]);
@@ -76,4 +79,4 @@ class ThreeSumTest{
         );
         assertEquals(result, ThreeSum.Solution(new int[]{0,0,0}));
     }
-}
+}*/
