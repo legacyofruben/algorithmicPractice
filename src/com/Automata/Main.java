@@ -3,11 +3,6 @@ package com.Automata;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.Stack;
-
-import static java.lang.System.in;
-import static java.lang.System.out;
-import static java.lang.System.setOut;
 
 public class Main {
 

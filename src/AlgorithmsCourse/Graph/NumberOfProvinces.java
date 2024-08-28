@@ -1,10 +1,5 @@
 package AlgorithmsCourse.Graph;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 public class NumberOfProvinces {
     /**
      *  A province is a conjunction of 1 or more cities that are connected

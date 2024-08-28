@@ -1,6 +1,8 @@
 package com.List_Sort;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 

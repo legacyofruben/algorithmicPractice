@@ -1,6 +1,5 @@
 package com.Algorithms.Kangaroo;
 
-import javax.management.relation.RelationSupport;
 import java.util.Scanner;
 
 class Kangaroo {

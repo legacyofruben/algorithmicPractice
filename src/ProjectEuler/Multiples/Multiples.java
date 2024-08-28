@@ -18,12 +18,12 @@ public class Multiples {
     }
 }
  class MultiplesTest{
-    @Test
+     @Test
      public void test_01(){
         assertEquals(23,Multiples.solution(10));
     }
      @Test
      public void test_02(){
-         assertEquals(23,Multiples.solution(1000));
+         assertEquals(233168,Multiples.solution(1000));
      }
  }

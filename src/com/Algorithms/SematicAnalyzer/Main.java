@@ -2,7 +2,8 @@ package com.Algorithms.SematicAnalyzer;
 
 //import com.sun.jmx.remote.internal.ArrayQueue;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Scanner;
 
 //import static javafx.application.Platform.exit;
 

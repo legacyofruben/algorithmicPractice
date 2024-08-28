@@ -1,9 +1,5 @@
 package com.Algorithms.MirrorTree;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-
 /**
  * Created by ruben_cerpa on 10/07/17.
  */
