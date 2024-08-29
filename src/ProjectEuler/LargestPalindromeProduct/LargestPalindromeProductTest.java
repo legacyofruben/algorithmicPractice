@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 public class LargestPalindromeProductTest{
     @Test
     public void test_01(){
-        assertEquals(0,
+        assertEquals(906609,
                 LargestPalindromeProduct.solution());
     }
     @Test
