@@ -1,6 +1,5 @@
 package com.Algorithms.UniversityGrades;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {

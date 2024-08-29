@@ -1,11 +1,7 @@
 package com.Max_Min;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import static java.lang.System.in;
 
 public class Main {
 

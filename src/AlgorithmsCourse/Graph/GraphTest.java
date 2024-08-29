@@ -1,8 +1,9 @@
 package AlgorithmsCourse.Graph;
 
-import org.junit.jupiter.api.Test;
-import java.util.List;
 import AlgorithmsCourse.Graph.GraphClone.Node;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

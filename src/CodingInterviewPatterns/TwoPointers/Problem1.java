@@ -3,7 +3,6 @@ package CodingInterviewPatterns.TwoPointers;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Given an array of numbers sorted in ascending order and a target sum, find a pair in the array whose sum is equal to the given target.

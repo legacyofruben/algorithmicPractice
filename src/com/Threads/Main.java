@@ -1,7 +1,5 @@
 package com.Threads;
 
-import java.util.Scanner;
-
 /**
  * Created by ruben_cerpa on 16/06/17.
  */

@@ -1,9 +1,5 @@
 package com.Algorithms.Lista_Circular;
 
-import com.Lista_Simple.List;
-
-import java.util.ArrayList;
-
 /**
  * Created by LEGACY on 02/04/2019.
  */
