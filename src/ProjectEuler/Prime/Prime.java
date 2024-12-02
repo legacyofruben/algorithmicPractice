@@ -42,7 +42,6 @@ public class Prime {
             return 2;
         }
         input--;
-        int num = 0;
         while (input != 0) {
             primes.add(new int[]{
                     primes.getLast()[0] + 1,
