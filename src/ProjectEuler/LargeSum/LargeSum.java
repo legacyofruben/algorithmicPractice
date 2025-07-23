@@ -2,46 +2,49 @@ package ProjectEuler.LargeSum;
 
 public class LargeSum {
 
-    static public String solution(int[] numbers) {
-        int[][] matrix = new int[100][50];
-        int index = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = numbers[index];
-                index++;
+    static public String solution(String numbers) {
+        int[][] matrix = new int[numbers.split("\n").length][numbers.split("\n")[0].length()];
+
+        int row = 0, col = 0;
+        for (String _row : numbers.split("\n")){
+            //System.out.println(_row);
+            for (char c : _row.toCharArray()){
+                //System.out.println(c);
+                matrix[row][col++] = Integer.parseInt(String.valueOf(c));
+                col = col > matrix[row].length-1 ? 0 : col;
             }
+            row++;
+            row = row > matrix.length-1 ? 0 : row;
+
         }
+
         System.out.println("Matrix");
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print( matrix[i][j]);
+        for (int[] ints : matrix) {
+            for (int i : ints){
+                System.out.print(i);
             }
             System.out.println();
         }
 
-        System.out.println("___________________________________________________________________________");
-        int sum = 0;
-        int carry = 0;
-        StringBuilder sumTotal= new StringBuilder();
-        System.out.println("Sum");
-        for (int j = matrix[0].length-1; j >= 0; j--) {
-            for (int i = 0; i < matrix.length; i++) {
-                sum+=matrix[i][j];
-                sum = carry == 0 ? sum : (sum+carry);
+        System.out.println("________________________");
+        long sum = 0;
+        long carry = 0;
+        StringBuilder result = new StringBuilder();
+        String tmp = "";
+        for (int i = matrix[0].length-1; i >= 0 ; i--) {
+            for (int[] ints : matrix) {
+                //System.out.println(ints[i]);
+                sum+=ints[i];
             }
-            StringBuilder tmp = new StringBuilder( String.valueOf(sum));
-            sumTotal.insert(0,tmp.substring(tmp.length()-1));
-            carry = tmp.length() > 1 ? Integer.parseInt(tmp.substring(0,tmp.length()-1)) : 0;
-//            System.out.println("sum: " + sum);
-//            System.out.println("sumTotal: " + sumTotal);
-//            System.out.println("carry: " + carry);
-        }
-        if (carry > 0){
-            sumTotal.insert(0,String.valueOf(carry));
+            tmp = String.valueOf(sum);
+            result.insert(0,
+                    (i-1) < 0 ? tmp : tmp.charAt(tmp.length()-1)
+                    );
+            carry = Long.parseLong(tmp.substring(0,tmp.length()-1));
+            System.out.println(tmp + " digit: " + tmp.charAt(tmp.length()-1) + " carry: " + carry + " result: " + result);
+            sum = carry;
         }
 
-        System.out.println("sumTotal: " + sumTotal);
-
-        return sumTotal.substring(0,10);
+        return result.length() > 5 ? result.substring(0,10) : result.toString();
     }
 }
